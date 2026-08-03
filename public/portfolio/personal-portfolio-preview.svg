@@ -1,0 +1,31 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Shan Marion T. Silveo personal portfolio website preview</title>
+  <desc id="desc">A branded illustration of a personal portfolio website layout with profile, skills, projects, and contact sections.</desc>
+  <rect width="1200" height="675" fill="#F8FAFC"/>
+  <rect x="56" y="56" width="1088" height="563" rx="18" fill="white" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="96" y="96" width="1008" height="52" rx="10" fill="#071A3A"/>
+  <circle cx="126" cy="122" r="8" fill="#22D3EE"/>
+  <circle cx="154" cy="122" r="8" fill="#2563EB"/>
+  <circle cx="182" cy="122" r="8" fill="#F8FAFC"/>
+  <rect x="828" y="114" width="70" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="922" y="114" width="70" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="1016" y="114" width="48" height="12" rx="6" fill="#22D3EE"/>
+  <rect x="96" y="188" width="424" height="320" rx="16" fill="#071A3A"/>
+  <circle cx="218" cy="296" r="64" fill="#2563EB"/>
+  <path d="M218 243C247.271 243 271 266.729 271 296C271 325.271 247.271 349 218 349C188.729 349 165 325.271 165 296C165 266.729 188.729 243 218 243Z" fill="#22D3EE"/>
+  <rect x="150" y="394" width="272" height="18" rx="9" fill="white"/>
+  <rect x="150" y="432" width="214" height="14" rx="7" fill="#CBD5E1"/>
+  <rect x="150" y="468" width="136" height="28" rx="8" fill="#22D3EE"/>
+  <rect x="568" y="196" width="228" height="18" rx="9" fill="#071A3A"/>
+  <rect x="568" y="236" width="444" height="14" rx="7" fill="#CBD5E1"/>
+  <rect x="568" y="266" width="370" height="14" rx="7" fill="#CBD5E1"/>
+  <rect x="568" y="328" width="536" height="132" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="600" y="360" width="92" height="16" rx="8" fill="#2563EB"/>
+  <rect x="600" y="398" width="202" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="600" y="426" width="158" height="12" rx="6" fill="#CBD5E1"/>
+  <rect x="842" y="360" width="92" height="16" rx="8" fill="#22D3EE"/>
+  <rect x="842" y="398" width="202" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="842" y="426" width="128" height="12" rx="6" fill="#CBD5E1"/>
+  <rect x="568" y="498" width="148" height="40" rx="10" fill="#2563EB"/>
+  <rect x="740" y="498" width="148" height="40" rx="10" fill="#071A3A"/>
+</svg>

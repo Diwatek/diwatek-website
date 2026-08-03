@@ -44,20 +44,39 @@ const services = [
   },
 ];
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  status?: string;
+  description: string;
+  technologies: string[];
+  href?: string;
+  buttonLabel: string;
+  preview: string;
+  image?: string;
+  imageAlt?: string;
+  external?: boolean;
+};
+
+const projects: Project[] = [
   {
-    title: "Diwatek Website",
+    title: "Shan Marion T. Silveo — Personal Portfolio",
     category: "Website Design & Development",
+    status: "Live Project",
     description:
-      "A responsive business website created to establish Diwatek’s brand, services, portfolio, and online presence.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
-    href: "https://diwatek.com",
+      "A responsive personal portfolio presenting professional experience, selected projects, technical skills, an editable CV, and contact information.",
+    technologies: ["Next.js", "JavaScript", "Chakra UI", "Vercel"],
+    href: "https://shanmarionsilveo.diwatek.com",
     buttonLabel: "View Live Site",
-    preview: "website",
+    preview: "portfolio",
+    image: "/portfolio/personal-portfolio-preview.svg",
+    imageAlt: "Shan Marion T. Silveo personal portfolio website preview",
+    external: true,
   },
   {
     title: "Barcode Label Studio",
     category: "Custom Web Application",
+    status: "In Progress",
     description:
       "A browser-based tool for creating, saving, searching, downloading, and printing single or bulk barcode labels.",
     technologies: [],
@@ -302,7 +321,17 @@ export default function Home() {
                       <div className="h-3 w-24 rounded-full bg-[#071A3A]" />
                       <div className="h-8 w-8 rounded-md bg-[#22D3EE]" />
                     </div>
-                    {project.preview === "barcode" ? (
+                    {project.image ? (
+                      <div className="relative h-full min-h-0 overflow-hidden rounded-md bg-[#F8FAFC]">
+                        <Image
+                          src={project.image}
+                          alt={project.imageAlt ?? project.title}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, 100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : project.preview === "barcode" ? (
                       <div className="grid grid-cols-4 gap-2" aria-hidden="true">
                         {[...Array(8)].map((_, index) => (
                           <div
@@ -344,7 +373,20 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-sm font-semibold text-[#2563EB]">{project.category}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-[#2563EB]">{project.category}</p>
+                    {project.status ? (
+                      <span
+                        className={`rounded-md border px-2 py-1 text-xs font-semibold ${
+                          project.status === "In Progress"
+                            ? "border-amber-300 bg-amber-50 text-amber-900"
+                            : "border-[#22D3EE]/50 bg-[#22D3EE]/10 text-[#071A3A]"
+                        }`}
+                      >
+                        {project.status}
+                      </span>
+                    ) : null}
+                  </div>
                   <h3 className="mt-3 text-xl font-bold text-[#071A3A]">{project.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-[#475569]">{project.description}</p>
 
@@ -365,6 +407,8 @@ export default function Home() {
                     {project.href ? (
                       <a
                         href={project.href}
+                        target={"external" in project && project.external ? "_blank" : undefined}
+                        rel={"external" in project && project.external ? "noopener noreferrer" : undefined}
                         className="inline-flex w-full items-center justify-center rounded-md bg-[#2563EB] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:ring-offset-2"
                       >
                         {project.buttonLabel}
