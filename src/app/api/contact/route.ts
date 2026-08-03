@@ -50,6 +50,20 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
 }
 
+function formatPhilippineDateTime(date: Date) {
+  const formatted = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Manila",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
+
+  return `${formatted} PHT`;
+}
+
 async function verifyTurnstile(token: string, request: NextRequest) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
@@ -134,7 +148,8 @@ export async function POST(request: NextRequest) {
     return jsonResponse("Contact form is not configured yet.", 503);
   }
 
-  const submittedAt = new Date().toISOString();
+  const submittedAt = new Date();
+  const submittedAtDisplay = formatPhilippineDateTime(submittedAt);
   const subject = `New Diwatek inquiry: ${projectType} - ${name}`;
 
   const plainText = [
@@ -142,7 +157,7 @@ export async function POST(request: NextRequest) {
     `Email: ${email}`,
     `Phone: ${phone || "Not provided"}`,
     `Project type: ${projectType}`,
-    `Submission date and time: ${submittedAt}`,
+    `Submission date and time: ${submittedAtDisplay}`,
     "",
     "Message:",
     message,
@@ -154,7 +169,7 @@ export async function POST(request: NextRequest) {
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
     <p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>
-    <p><strong>Submission date and time:</strong> ${escapeHtml(submittedAt)}</p>
+    <p><strong>Submission date and time:</strong> ${escapeHtml(submittedAtDisplay)}</p>
     <h2>Message</h2>
     <p>${escapeHtml(message).replaceAll("\n", "<br />")}</p>
   `;
