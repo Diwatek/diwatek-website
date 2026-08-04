@@ -88,15 +88,15 @@ const projects: Project[] = [
     external: true,
   },
   {
-    title: "Cafe Website",
-    category: "Cafe Website Concept",
+    title: "Wedding & Events Website",
+    category: "Event Website Concept",
     status: "Coming Soon",
     description:
-      "A warm and inviting cafe website concept designed to present the menu, signature drinks, shop atmosphere, location information, opening hours, and customer contact options.",
+      "An elegant event website concept planned for presenting wedding details, birthday celebrations, event schedules, venues, photo galleries, guest information, and RSVP interfaces.",
     technologies: [],
     buttonLabel: "Coming Soon",
-    image: "/portfolio/cafe-website-preview.webp",
-    imageAlt: "Cafe website concept preview",
+    image: "/portfolio/wedding-events-website-preview.webp",
+    imageAlt: "Wedding and events website concept preview",
     disabled: true,
   },
   {
@@ -432,6 +432,34 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-md border border-slate-200 bg-[#F8FAFC] px-6 py-7 sm:px-8">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#2563EB]">
+                  And More
+                </p>
+                <h3 className="mt-2 text-2xl font-bold text-[#071A3A]">
+                  Have another website idea in mind?
+                </h3>
+                <p className="mt-3 text-base leading-7 text-[#475569]">
+                  These concepts are only examples of what Diwatek can create.
+                  Websites can be designed around different businesses, services,
+                  events, personal projects, and unique requirements.
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[#475569]">
+                  Tell us what you need, and we can plan a website that fits your
+                  goals, content, and audience.
+                </p>
+              </div>
+              <a
+                href="#contact"
+                className="inline-flex w-full items-center justify-center rounded-md bg-[#2563EB] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:ring-offset-2 md:w-auto md:shrink-0"
+              >
+                Discuss Your Website
+              </a>
+            </div>
           </div>
         </div>
       </section>
