@@ -47,15 +47,16 @@ const services = [
 type Project = {
   title: string;
   category: string;
-  status?: string;
+  status: "Live Project" | "Live Demo" | "Coming Soon";
+  disclosure?: string;
   description: string;
   technologies: string[];
   href?: string;
   buttonLabel: string;
-  preview: string;
-  image?: string;
+  image: string;
   imageAlt?: string;
   external?: boolean;
+  disabled?: boolean;
 };
 
 const projects: Project[] = [
@@ -68,33 +69,85 @@ const projects: Project[] = [
     technologies: ["Next.js", "JavaScript", "Chakra UI", "Vercel"],
     href: "https://shanmarionsilveo.diwatek.com",
     buttonLabel: "View Live Site",
-    preview: "portfolio",
-    image: "/portfolio/personal-portfolio-preview.svg",
+    image: "/portfolio/personal-portfolio-preview.webp",
     imageAlt: "Shan Marion T. Silveo personal portfolio website preview",
     external: true,
   },
   {
-    title: "Barcode Label Studio",
-    category: "Custom Web Application",
-    status: "In Progress",
+    title: "Construction Business Website",
+    category: "Business Website Concept",
+    status: "Live Demo",
+    disclosure: "Independent Concept Project",
     description:
-      "A browser-based tool for creating, saving, searching, downloading, and printing single or bulk barcode labels.",
-    technologies: [],
-    href: "#",
-    buttonLabel: "View Project",
-    preview: "barcode",
+      "A responsive construction-business concept featuring services, project case studies, company information, and a design-only inquiry experience.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
+    href: "https://construction.diwatek.com",
+    buttonLabel: "View Live Demo",
+    image: "/portfolio/construction-business-live-preview.webp",
+    imageAlt: "Crestline Buildworks construction business website preview",
+    external: true,
   },
   {
-    title: "Construction Business Website",
-    category: "Concept Website",
+    title: "Cafe Website",
+    category: "Cafe Website Concept",
+    status: "Coming Soon",
     description:
-      "A modern responsive website concept designed for a construction company to present its services, completed projects, company profile, and contact details.",
+      "A warm and inviting cafe website concept designed to present the menu, signature drinks, shop atmosphere, location information, opening hours, and customer contact options.",
     technologies: [],
     buttonLabel: "Coming Soon",
-    preview: "construction",
+    image: "/portfolio/cafe-website-preview.webp",
+    imageAlt: "Cafe website concept preview",
+    disabled: true,
+  },
+  {
+    title: "Restaurant Website",
+    category: "Restaurant Website Concept",
+    status: "Coming Soon",
+    description:
+      "A modern restaurant website concept planned for presenting food menus, featured dishes, dining information, restaurant atmosphere, contact details, and reservation options.",
+    technologies: [],
+    buttonLabel: "Coming Soon",
+    image: "/portfolio/restaurant-website-preview.webp",
+    imageAlt: "Restaurant website concept preview",
+    disabled: true,
+  },
+  {
+    title: "Pet Shop & Grooming Website",
+    category: "Pet Care Website Concept",
+    status: "Coming Soon",
+    description:
+      "A friendly pet-care website concept planned for presenting pet supplies, grooming services, service packages, store information, and appointment inquiry options.",
+    technologies: [],
+    buttonLabel: "Coming Soon",
+    image: "/portfolio/pet-grooming-website-preview.webp",
+    imageAlt: "Pet shop and grooming website concept preview",
+    disabled: true,
+  },
+  {
+    title: "Vehicle Dealership Website",
+    category: "Automotive Website Concept",
+    status: "Coming Soon",
+    description:
+      "A professional vehicle-dealership website concept planned for presenting available vehicles, specifications, pricing information, financing guidance, seller details, and inquiry options.",
+    technologies: [],
+    buttonLabel: "Coming Soon",
+    image: "/portfolio/vehicle-dealership-preview.webp",
+    imageAlt: "Vehicle dealership website concept preview",
+    disabled: true,
   },
 ];
 
+function getStatusBadgeClass(status: Project["status"]) {
+  if (status === "Live Demo") {
+    return "border-emerald-300 bg-emerald-50 text-emerald-900";
+  }
+
+  if (status === "Coming Soon") {
+    return "border-slate-300 bg-slate-100 text-slate-700";
+  }
+
+  return "border-[#22D3EE]/50 bg-[#22D3EE]/10 text-[#071A3A]";
+}
 const audienceCards = [
   {
     title: "For Businesses",
@@ -309,85 +362,37 @@ export default function Home() {
             thoughtful design.
           </p>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <article
                 key={project.title}
                 className="group flex h-full flex-col overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#2563EB]/60 hover:shadow-md"
               >
                 <div className="aspect-video border-b border-slate-200 bg-[#F8FAFC] p-5">
-                  <div className="flex h-full flex-col justify-between rounded-md border border-slate-200 bg-white p-4 shadow-sm">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="h-3 w-24 rounded-full bg-[#071A3A]" />
-                      <div className="h-8 w-8 rounded-md bg-[#22D3EE]" />
-                    </div>
-                    {project.image ? (
-                      <div className="relative h-full min-h-0 overflow-hidden rounded-md bg-[#F8FAFC]">
-                        <Image
-                          src={project.image}
-                          alt={project.imageAlt ?? project.title}
-                          fill
-                          sizes="(min-width: 1024px) 33vw, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    ) : project.preview === "barcode" ? (
-                      <div className="grid grid-cols-4 gap-2" aria-hidden="true">
-                        {[...Array(8)].map((_, index) => (
-                          <div
-                            key={index}
-                            className="h-12 rounded-sm border border-slate-200 bg-slate-50 p-1"
-                          >
-                            <div className="flex h-full items-end gap-0.5">
-                              {[...Array(7)].map((__, lineIndex) => (
-                                <span
-                                  key={lineIndex}
-                                  className="block bg-[#071A3A]"
-                                  style={{ height: `${28 + ((lineIndex + index) % 4) * 10}%`, width: "3px" }}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : project.preview === "construction" ? (
-                      <div className="grid grid-cols-3 gap-3" aria-hidden="true">
-                        <div className="col-span-2 h-20 rounded-md bg-[#071A3A]" />
-                        <div className="h-20 rounded-md bg-[#2563EB]" />
-                        <div className="h-10 rounded-md bg-slate-200" />
-                        <div className="h-10 rounded-md bg-[#22D3EE]" />
-                        <div className="h-10 rounded-md bg-slate-200" />
-                      </div>
-                    ) : (
-                      <div className="space-y-3" aria-hidden="true">
-                        <div className="h-3 w-full rounded-full bg-slate-200" />
-                        <div className="h-3 w-4/5 rounded-full bg-slate-200" />
-                        <div className="grid grid-cols-3 gap-3 pt-2">
-                          <div className="h-14 rounded-md bg-[#071A3A]" />
-                          <div className="h-14 rounded-md bg-[#2563EB]" />
-                          <div className="h-14 rounded-md bg-[#22D3EE]" />
-                        </div>
-                      </div>
-                    )}
+                  <div className="relative h-full overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt ?? project.title}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                    />
                   </div>
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-sm font-semibold text-[#2563EB]">{project.category}</p>
-                    {project.status ? (
-                      <span
-                        className={`rounded-md border px-2 py-1 text-xs font-semibold ${
-                          project.status === "In Progress"
-                            ? "border-amber-300 bg-amber-50 text-amber-900"
-                            : "border-[#22D3EE]/50 bg-[#22D3EE]/10 text-[#071A3A]"
-                        }`}
-                      >
-                        {project.status}
-                      </span>
-                    ) : null}
+                    <span className={`rounded-md border px-2 py-1 text-xs font-semibold ${getStatusBadgeClass(project.status)}`}>
+                      {project.status}
+                    </span>
                   </div>
                   <h3 className="mt-3 text-xl font-bold text-[#071A3A]">{project.title}</h3>
+                  {project.disclosure ? (
+                    <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                      {project.disclosure}
+                    </p>
+                  ) : null}
                   <p className="mt-3 text-sm leading-6 text-[#475569]">{project.description}</p>
 
                   {project.technologies.length > 0 ? (
@@ -407,16 +412,21 @@ export default function Home() {
                     {project.href ? (
                       <a
                         href={project.href}
-                        target={"external" in project && project.external ? "_blank" : undefined}
-                        rel={"external" in project && project.external ? "noopener noreferrer" : undefined}
+                        target={project.external ? "_blank" : undefined}
+                        rel={project.external ? "noopener noreferrer" : undefined}
                         className="inline-flex w-full items-center justify-center rounded-md bg-[#2563EB] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:ring-offset-2"
                       >
                         {project.buttonLabel}
+                        {project.external ? <span className="sr-only"> opens in a new tab</span> : null}
                       </a>
                     ) : (
-                      <span className="inline-flex w-full items-center justify-center rounded-md border border-slate-300 bg-slate-100 px-4 py-3 text-sm font-semibold text-[#475569]">
+                      <button
+                        type="button"
+                        disabled={project.disabled}
+                        className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-md border border-slate-300 bg-slate-100 px-4 py-3 text-sm font-semibold text-[#475569]"
+                      >
                         {project.buttonLabel}
-                      </span>
+                      </button>
                     )}
                   </div>
                 </div>
@@ -592,7 +602,7 @@ export default function Home() {
               height={48}
               className="h-10 w-auto"
             />
-            <p className="mt-4 text-sm text-slate-300">© {year} Diwatek. All rights reserved.</p>
+            <p className="mt-4 text-sm text-slate-300">&copy; {year} Diwatek. All rights reserved.</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-medium text-slate-300">
             <a className="transition hover:text-white" href="https://www.facebook.com/people/Diwatek/61592484133450/" target="_blank" rel="noopener noreferrer">Facebook</a>
