@@ -1,8 +1,51 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f8fafc;
   --foreground: #071a3a;
+  --surface: #ffffff;
+  --surface-elevated: #f8fafc;
+  --muted: #e2e8f0;
+  --muted-foreground: #475569;
+  --subtle-foreground: #64748b;
+  --border: #e2e8f0;
+  --strong-border: #cbd5e1;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent: #22d3ee;
+  --accent-foreground: #071a3a;
+  --success-surface: #ecfdf5;
+  --success-border: #6ee7b7;
+  --success-text: #064e3b;
+  --warning-surface: #fffbeb;
+  --warning-border: #fde68a;
+  --warning-text: #78350f;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #050d1b;
+  --foreground: #f8fafc;
+  --surface: #0b172a;
+  --surface-elevated: #0f1f35;
+  --muted: #14243a;
+  --muted-foreground: #cbd5e1;
+  --subtle-foreground: #94a3b8;
+  --border: #23344d;
+  --strong-border: #33455f;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --accent: #22d3ee;
+  --accent-foreground: #050d1b;
+  --success-surface: #062d24;
+  --success-border: #0f766e;
+  --success-text: #a7f3d0;
+  --warning-surface: #372712;
+  --warning-border: #92400e;
+  --warning-text: #fde68a;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -19,4 +62,32 @@ body {
 
 a {
   text-underline-offset: 4px;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  box-shadow: 0 0 0 1000px var(--surface) inset;
+  caret-color: var(--foreground);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  header,
+  section,
+  article,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    transition-duration: 180ms;
+    transition-property: background-color, border-color, color, box-shadow;
+  }
 }

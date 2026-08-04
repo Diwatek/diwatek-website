@@ -65,7 +65,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-md border border-white/15 bg-white p-5 text-[#071A3A] shadow-sm sm:p-6">
+    <div className="rounded-md border border-white/15 bg-[var(--surface)] p-5 text-[var(--foreground)] shadow-sm sm:p-6">
       <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
 
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
@@ -76,7 +76,7 @@ export function ContactForm() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="name" className="block text-sm font-semibold text-[#071A3A]">
+            <label htmlFor="name" className="block text-sm font-semibold text-[var(--foreground)]">
               Full name
             </label>
             <input
@@ -86,12 +86,12 @@ export function ContactForm() {
               required
               maxLength={100}
               autoComplete="name"
-              className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 text-sm text-[#071A3A] outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/25"
+              className="mt-2 w-full rounded-md border border-[var(--strong-border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition placeholder:text-[var(--subtle-foreground)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/25"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-semibold text-[#071A3A]">
+            <label htmlFor="email" className="block text-sm font-semibold text-[var(--foreground)]">
               Email address
             </label>
             <input
@@ -101,14 +101,14 @@ export function ContactForm() {
               required
               maxLength={254}
               autoComplete="email"
-              className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 text-sm text-[#071A3A] outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/25"
+              className="mt-2 w-full rounded-md border border-[var(--strong-border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition placeholder:text-[var(--subtle-foreground)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/25"
             />
           </div>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="phone" className="block text-sm font-semibold text-[#071A3A]">
+            <label htmlFor="phone" className="block text-sm font-semibold text-[var(--foreground)]">
               Phone number
             </label>
             <input
@@ -117,12 +117,12 @@ export function ContactForm() {
               type="tel"
               maxLength={30}
               autoComplete="tel"
-              className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 text-sm text-[#071A3A] outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/25"
+              className="mt-2 w-full rounded-md border border-[var(--strong-border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition placeholder:text-[var(--subtle-foreground)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/25"
             />
           </div>
 
           <div>
-            <label htmlFor="projectType" className="block text-sm font-semibold text-[#071A3A]">
+            <label htmlFor="projectType" className="block text-sm font-semibold text-[var(--foreground)]">
               Project type
             </label>
             <select
@@ -131,7 +131,7 @@ export function ContactForm() {
               required
               autoComplete="off"
               defaultValue=""
-              className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm text-[#071A3A] outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/25"
+              className="mt-2 w-full rounded-md border border-[var(--strong-border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/25"
             >
               <option value="" disabled>
                 Select a project type
@@ -146,7 +146,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-semibold text-[#071A3A]">
+          <label htmlFor="message" className="block text-sm font-semibold text-[var(--foreground)]">
             Message
           </label>
           <textarea
@@ -156,7 +156,7 @@ export function ContactForm() {
             maxLength={3000}
             rows={5}
             autoComplete="off"
-            className="mt-2 w-full resize-y rounded-md border border-slate-300 px-4 py-3 text-sm leading-6 text-[#071A3A] outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/25"
+            className="mt-2 w-full resize-y rounded-md border border-[var(--strong-border)] bg-[var(--surface)] px-4 py-3 text-sm leading-6 text-[var(--foreground)] outline-none transition placeholder:text-[var(--subtle-foreground)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/25"
           />
         </div>
 
@@ -164,7 +164,7 @@ export function ContactForm() {
           {turnstileSiteKey ? (
             <div className="cf-turnstile" data-sitekey={turnstileSiteKey} />
           ) : (
-            <p className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <p className="rounded-md border border-[var(--warning-border)] bg-[var(--warning-surface)] px-4 py-3 text-sm text-[var(--warning-text)]">
               Turnstile is not configured yet. Add NEXT_PUBLIC_TURNSTILE_SITE_KEY before accepting inquiries.
             </p>
           )}
@@ -174,7 +174,7 @@ export function ContactForm() {
           {message ? (
             <p
               className={`text-sm font-medium ${
-                submitState === "success" ? "text-emerald-700" : "text-red-700"
+                submitState === "success" ? "text-emerald-700 dark:text-emerald-300" : "text-red-700 dark:text-red-300"
               }`}
             >
               {message}
@@ -185,7 +185,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={submitState === "submitting" || !turnstileSiteKey}
-          className="inline-flex w-full items-center justify-center rounded-md bg-[#2563EB] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-400"
+          className="inline-flex w-full items-center justify-center rounded-md bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--background)] disabled:cursor-not-allowed disabled:bg-slate-400 disabled:text-white/90"
         >
           {submitState === "submitting" ? "Sending..." : "Send Inquiry"}
         </button>

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,6 +48,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8FAFC" },
+    { media: "(prefers-color-scheme: dark)", color: "#050D1B" },
+  ],
+  colorScheme: "light dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,8 +65,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} h-full scroll-smooth antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
