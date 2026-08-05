@@ -91,14 +91,16 @@ const projects: Project[] = [
   {
     title: "Wedding & Events Website",
     category: "Event Website Concept",
-    status: "Coming Soon",
+    status: "Live Demo",
+    disclosure: "Independent Concept Project",
     description:
-      "An elegant event website concept planned for presenting wedding details, birthday celebrations, event schedules, venues, photo galleries, guest information, and RSVP interfaces.",
-    technologies: [],
-    buttonLabel: "Coming Soon",
-    image: "/portfolio/wedding-events-website-preview.webp",
-    imageAlt: "Wedding and events website concept preview",
-    disabled: true,
+      "A private wedding website concept featuring guest-specific invitation access, an animated digital invitation, pre-wedding information, personalized guest passes, a design-only RSVP experience, and a complete wedding memories gallery.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
+    href: "https://wedding.diwatek.com",
+    buttonLabel: "View Live Demo",
+    image: "/portfolio/wedding-events-live-preview.webp",
+    imageAlt: "Private wedding invitation and memories website live demo preview",
+    external: true,
   },
   {
     title: "Restaurant Website",
