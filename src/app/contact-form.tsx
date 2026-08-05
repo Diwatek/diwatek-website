@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 
 const projectTypes = [
@@ -19,15 +20,24 @@ export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
+  const [privacyError, setPrivacyError] = useState("");
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitState("submitting");
     setMessage("");
+    setPrivacyError("");
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const privacyAcknowledged = formData.get("privacyAcknowledged") === "true";
+
+    if (!privacyAcknowledged) {
+      setPrivacyError("Please confirm that you have read the Privacy Notice before sending your inquiry.");
+      return;
+    }
+
+    setSubmitState("submitting");
 
     const payload = {
       name: String(formData.get("name") ?? ""),
@@ -37,6 +47,7 @@ export function ContactForm() {
       message: String(formData.get("message") ?? ""),
       company: String(formData.get("company") ?? ""),
       turnstileToken: String(formData.get("cf-turnstile-response") ?? ""),
+      privacyAcknowledged,
     };
 
     try {
@@ -168,6 +179,58 @@ export function ContactForm() {
               Turnstile is not configured yet. Add NEXT_PUBLIC_TURNSTILE_SITE_KEY before accepting inquiries.
             </p>
           )}
+        </div>
+
+        <div className="rounded-md border border-[var(--border)] bg-[var(--surface-elevated)] p-4 text-sm leading-6 text-[var(--muted-foreground)]">
+          Diwatek will use the information you provide to respond to your inquiry,
+          understand your requested service, and maintain reasonable communication
+          records. Please do not submit passwords, payment credentials, government
+          identification numbers, or other sensitive information. See the{" "}
+          <Link
+            href="/privacy"
+            className="font-semibold text-[var(--primary)] underline transition hover:text-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--surface-elevated)]"
+          >
+            Diwatek Privacy Notice
+          </Link>{" "}
+          for details about processing, retention, service providers, and your
+          privacy rights.
+        </div>
+
+        <div>
+          <label className="flex items-start gap-3 rounded-md border border-[var(--border)] bg-[var(--surface)] p-4 text-sm leading-6 text-[var(--muted-foreground)]">
+            <input
+              name="privacyAcknowledged"
+              type="checkbox"
+              value="true"
+              required
+              aria-describedby={privacyError ? "privacy-acknowledgment-error" : undefined}
+              onChange={() => setPrivacyError("")}
+              onInvalid={() =>
+                setPrivacyError(
+                  "Please confirm that you have read the Privacy Notice before sending your inquiry.",
+                )
+              }
+              className="mt-1 h-4 w-4 rounded border-[var(--strong-border)] text-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/30"
+            />
+            <span>
+              I have read the{" "}
+              <Link
+                href="/privacy"
+                className="font-semibold text-[var(--primary)] underline transition hover:text-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--surface)]"
+              >
+                Privacy Notice
+              </Link>{" "}
+              and understand how my submitted information will be used to respond
+              to my inquiry.
+            </span>
+          </label>
+          <div id="privacy-acknowledgment-error" aria-live="polite" className="mt-2 min-h-5">
+            {privacyError ? (
+              <p role="alert" className="text-sm font-medium text-red-700 dark:text-red-300">
+                {privacyError}
+              </p>
+            ) : null}
+          </div>
         </div>
 
         <div aria-live="polite" className="min-h-6">

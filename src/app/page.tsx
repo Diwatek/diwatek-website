@@ -690,6 +690,7 @@ export default function Home() {
             <a className="transition hover:text-white" href="https://github.com/Diwatek" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a className="transition hover:text-white" href="mailto:hello.diwatek@gmail.com">Email</a>
             <a className="transition hover:text-white" href="tel:+639283018626">Phone</a>
+            <a className="transition hover:text-white" href="/privacy">Privacy Notice</a>
           </div>
         </div>
       </footer>

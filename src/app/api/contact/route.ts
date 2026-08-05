@@ -19,6 +19,7 @@ type ContactPayload = {
   message?: unknown;
   company?: unknown;
   turnstileToken?: unknown;
+  privacyAcknowledged?: unknown;
 };
 
 function jsonResponse(message: string, status: number) {
@@ -136,6 +137,10 @@ export async function POST(request: NextRequest) {
     return jsonResponse("Please select a valid project type.", 400);
   }
 
+  if (payload.privacyAcknowledged !== true) {
+    return jsonResponse("Please confirm that you have read the Privacy Notice.", 400);
+  }
+
   if (!turnstileToken || !(await verifyTurnstile(turnstileToken, request))) {
     return jsonResponse("Please complete the verification challenge.", 400);
   }
@@ -157,6 +162,7 @@ export async function POST(request: NextRequest) {
     `Email: ${email}`,
     `Phone: ${phone || "Not provided"}`,
     `Project type: ${projectType}`,
+    "Privacy acknowledgment: Accepted",
     `Submission date and time: ${submittedAtDisplay}`,
     "",
     "Message:",
@@ -169,6 +175,7 @@ export async function POST(request: NextRequest) {
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
     <p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>
+    <p><strong>Privacy acknowledgment:</strong> Accepted</p>
     <p><strong>Submission date and time:</strong> ${escapeHtml(submittedAtDisplay)}</p>
     <h2>Message</h2>
     <p>${escapeHtml(message).replaceAll("\n", "<br />")}</p>
