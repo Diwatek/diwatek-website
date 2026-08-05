@@ -1,6 +1,7 @@
 import {
   BriefcaseBusiness,
   Code2,
+  ExternalLink,
   LayoutTemplate,
   Lightbulb,
   Mail,
@@ -16,6 +17,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { ContactForm } from "./contact-form";
 
 const navLinks = ["Home", "Services", "Portfolio", "About", "Contact"];
+const PROJECT_REQUIREMENTS_FORM_URL = "https://forms.gle/BkeGQqpsc4BzzcfZA";
 
 const services = [
   {
@@ -331,6 +333,16 @@ export default function Home() {
                 View Our Work
               </a>
             </div>
+            <a
+              href={PROJECT_REQUIREMENTS_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] transition hover:text-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+            >
+              Complete Project Form
+              <ExternalLink aria-hidden="true" size={16} strokeWidth={1.8} />
+              <span className="sr-only"> opens in a new tab</span>
+            </a>
           </div>
 
           <div className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--surface-elevated)] shadow-sm sm:aspect-[3/2] lg:aspect-[4/3]">
@@ -637,6 +649,23 @@ export default function Home() {
                   </span>
                 </a>
               ))}
+            </div>
+
+            <div className="mt-8 rounded-md border border-white/15 bg-[var(--surface)]/5 p-5">
+              <p className="text-sm leading-6 text-slate-300">
+                Already have a project in mind? Complete the requirements form so
+                Diwatek can review your needs and prepare an appropriate quotation.
+              </p>
+              <a
+                href={PROJECT_REQUIREMENTS_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[#071A3A] sm:w-auto"
+              >
+                Submit Project Requirements
+                <ExternalLink aria-hidden="true" size={16} strokeWidth={1.8} />
+                <span className="sr-only"> opens in a new tab</span>
+              </a>
             </div>
           </div>
 
